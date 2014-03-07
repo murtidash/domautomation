@@ -34,7 +34,7 @@ class ServerCommand(models.Model):
 	status = models.CharField(max_length=15, choices=COMMAND_STATUS)
 	game = models.ForeignKey(Game)
 
-		def __unicode__(self):
+	def __unicode__(self):
 		return self.game.name + " " + self.command + " " + self.arg1
 
 	
