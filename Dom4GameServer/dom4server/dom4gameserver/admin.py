@@ -1,3 +1,6 @@
 from django.contrib import admin
+from dom4gameserver import Game, ServerCommand
 
-# Register your models here.
+admin.site.register(Game)
+admin.site.register(ServerCommand)
+
