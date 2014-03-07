@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Game(models.Model):
-	GAME_STATUSES [
+	GAME_STATUSES = [
 		('NEW','New Game'),
 		('PRETENDER','Game Accepting Pretenders'),
 		('RUNNING','Game Running'),
@@ -11,8 +11,8 @@ class Game(models.Model):
 	]
 
 	name = models.CharField(max_length=500)
-	servername = models.CharFiels(max_length=64)
-	status = models.CharFiels(choices=GAME_STATUSES)
+	servername = models.CharField(max_length=64)
+	status = models.CharField(max_length=15, choices=GAME_STATUSES)
 
 class ServerCommand(models.Model):
 	SERVER_COMMANDS = [
@@ -26,9 +26,9 @@ class ServerCommand(models.Model):
 		('EXECUTING','Command being processed'),
 		('EXECUTED','Command complete')
 	]
-	command = models.CharField(choices=SERVER_COMMANDS)
-	arg1 = models.CharField()
-	status = models.CharField(choices=COMMAND_STATUS)
-	game = ForeignKey(Game)
+	command = models.CharField(max_length=15, choices=SERVER_COMMANDS)
+	arg1 = models.CharField(max_length=15)
+	status = models.CharField(max_length=15, choices=COMMAND_STATUS)
+	game = models.ForeignKey(Game)
 	
 
