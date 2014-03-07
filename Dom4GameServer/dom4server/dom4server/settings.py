@@ -8,6 +8,18 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
+##### dom4 Server Specific Settings
+
+# This is a path where all the game scripts live.
+# Game scripts have the 'ServerName' as a script name
+# and need #!/bin/sh or whatever at the top.
+DOM4GAME_DIR = '/var/dom4/games/'
+
+# Path to dom4 executable.
+DOM4_PATH = '/var/dom4/dom4'
+
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
