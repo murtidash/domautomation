@@ -1,6 +1,6 @@
 #!/bin/bash
 
 cd /home/utena/domAutomation/Dom4GameServer/dom4server/
-python manage.py checkname 2>&1 >> /home/utena/domAutomation/Dom4GameServer/dom4server/serverlogs/checkname.log
-python processcommands.py checkname 2>&1 >> /home/utena/domAutomation/Dom4GameServer/dom4server/serverlogs/processcommands.log
+python manage.py checkgames 2>&1 >> /home/utena/domAutomation/Dom4GameServer/dom4server/serverlogs/checkname.log
+python manage.py processcommands 2>&1 >> /home/utena/domAutomation/Dom4GameServer/dom4server/serverlogs/processcommands.log
 

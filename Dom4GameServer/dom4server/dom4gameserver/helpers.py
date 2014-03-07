@@ -1,4 +1,5 @@
-
+from subprocess import check_output, call
+import re 
 
 def findgameprocess(gg):
     processes = check_output(['ps','ax']).splitlines()
@@ -14,7 +15,7 @@ def killgame(game):
     processline = findgameprocess(game)
     if not processline:
         return None
-    pidre =
+    pidre =""
 
 
 
