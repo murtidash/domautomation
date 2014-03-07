@@ -14,6 +14,9 @@ class Game(models.Model):
 	servername = models.CharField(max_length=64)
 	status = models.CharField(max_length=15, choices=GAME_STATUSES)
 
+	def __unicode__(self):
+		return self.name
+
 class ServerCommand(models.Model):
 	SERVER_COMMANDS = [
 		('RESET','Reset Timer'),
@@ -30,5 +33,9 @@ class ServerCommand(models.Model):
 	arg1 = models.CharField(max_length=15)
 	status = models.CharField(max_length=15, choices=COMMAND_STATUS)
 	game = models.ForeignKey(Game)
+
+		def __unicode__(self):
+		return self.game.name + " " + self.command + " " + self.arg1
+
 	
 
