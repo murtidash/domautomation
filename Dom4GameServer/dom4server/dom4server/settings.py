@@ -18,6 +18,8 @@ DOM4GAME_DIR = '/var/dom4/games/'
 # Path to dom4 executable.
 DOM4_PATH = '/var/dom4/dom4'
 
+# User to run dom4 games as
+DOM4_USER = 'utena'
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
