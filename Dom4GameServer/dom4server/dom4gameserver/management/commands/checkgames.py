@@ -27,7 +27,7 @@ class Command(BaseCommand):
             for gg in Game.objects.filter(status__in = ['PRETENDER','RUNNING']):
                 if not findgameprocess(gg):
                     self.stdout.write("I didn't find game: %s.   Attempting to Restart..." % gg.name)
-                    call(["sudo", '-u',settings.DOM4_USER,'%s' % gg.servername],cwd=settings.DOM4GAME_DIR)
+                    call(["sudo", '-u',settings.DOM4_USER,'%s/%s' % (settings.DOM4GAME_DIR,gg.servername)],cwd=settings.DOM4GAME_DIR)
 
 
 

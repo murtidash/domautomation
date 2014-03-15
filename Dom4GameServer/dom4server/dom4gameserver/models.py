@@ -30,12 +30,35 @@ class ServerCommand(models.Model):
         ('EXECUTED','Command complete')
     ]
     command = models.CharField(max_length=15, choices=SERVER_COMMANDS)
-    arg1 = models.CharField(max_length=15)
+    arg1 = models.CharField(max_length=25, blank=True)
     status = models.CharField(max_length=15, choices=COMMAND_STATUS)
     game = models.ForeignKey(Game)
 
     def __unicode__(self):
         return self.game.name + " " + self.command + " " + self.arg1
 
+class Request(models.Model):
+    REQUEST_STATUS = [
+            ('NEW','New Request'),
+            ('APPROVED', 'Request Approved'),
+            ('PROCESSED', 'Request Processed'),
+            ('DECLINED', 'Request Declined'),
+            ('CLOSED', 'Request Closed')
+            ]
+    REQUEST_COMMANDS = [
+            ('RESET','Timer Reset'),
+            ('SETTIMER', 'Set or Reset Game Timer')
+            ]
+
+    command = models.CharField(max_length=15, choices=REQUEST_COMMANDS)
+    arg1 = models.CharField(max_length=25, blank=True)
+    status = models.CharField(max_length=15, choices=REQUEST_STATUS, default='NEW')
+    game = models.ForeignKey(Game)
+    serverCommand = models.ForeignKey(ServerCommand, blank=True, null=True)
+    requestDate = models.DateTimeField(auto_now_add = True)
+    approvedDate = models.DateTimeField(editable=False, null=True)
+
+    def __unicode__(self):
+        return self.game.name + " " + self.command + " " + self.arg1
 
 
