@@ -1,0 +1,100 @@
+<HTML>
+<HEAD>
+
+<SCRIPT>
+
+function changeCommand() {
+  document.getElementById("RESET").style.display = "none";
+  document.getElementById("SETTIMER").style.display = "none";
+  document.getElementById(document.getElementById("command").value).style.display = "block";
+}
+
+</SCRIPT>
+
+
+</HEAD>
+<BODY>
+<h1> Dominions 4 Game Server Requests </h1>
+<p>
+<h2> Create New Request: </h2>
+<form action = "{% url 'dom4gameserver:newrequest' %}" method="post">
+  {% csrf_token %}
+  <select id="command" name="command" onchange="changeCommand()">
+	  {% for name, value in reqs %}
+	  <option value="{{ name }}">{{ value }}</option>
+	  {% endfor %}
+  </select><br>
+  <span><b>Game: </b></span>
+  <select name="game">
+	  {% for game in games %}
+	  <option value="{{ game.id }}">{{ game.name }}</option>
+	  {% endfor %}
+  </select>
+  <div id="RESET">
+  
+
+  </div>
+  <div id="SETTIMER" style="display: none;">
+	  <span><b>New Timer:</b></span><input type="text" name="timer"> 
+  
+  </div>
+
+  <input type="Submit" value="New Request">
+
+
+</form>
+<p>
+<hr>
+<h2> Unapproved Requests: </h2>
+<table width="100%">
+ {% for rr in vreqs %}
+  {% if rr.status == "NEW" %}
+    <tr>
+	    <td>{{ rr.game.name }}</td><td>{{ rr.get_command_display }}</td><td>{{ rr.requestDate }}</td><td>
+		    {% if user.is_staff %}
+		    <a href="{% url 'dom4gameserver:approverequest' rr.id %}">Approve</a>
+		    {% endif %}
+	      </td>
+
+    </tr>
+  {% endif %}
+ {% endfor %} 
+
+</table>
+<hr>
+<h2> Approved Requests: </h2>
+<table width="100%">
+ {% for rr in vreqs %}
+   {% if rr.status == "APPROVED" %}
+       <tr>
+            <td>{{ rr.game.name }}</td><td>{{ rr.get_command_display }}</td><td>{{ rr.requestDate }}</td><td>
+              </td>
+
+       </tr>
+   {% endif %}
+ {% endfor %}
+
+</table>
+<hr>
+<h2> Processed Requests: </h2>
+<table width="100%">
+ {% for rr in vreqs %}
+  {% if rr.status == "PROCESSED" %}
+    <tr>
+           <td>{{ rr.game.name }}</td><td>{{ rr.get_command_display }}</td><td>{{ rr.requestDate }}</td><td>
+ 		    {% if user.is_staff %}
+		    <a href="{% url 'dom4gameserver:closerequest' rr.id %}">Close</a>
+		    {% endif %}
+	           </td>
+
+      </tr>
+  {% endif %}
+ {% endfor %}
+
+</table>
+
+</BODY>
+</HTML>
+
+
+
