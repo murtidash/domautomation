@@ -47,7 +47,7 @@ class Request(models.Model):
             ]
     REQUEST_COMMANDS = [
             ('RESET','Timer Reset'),
-            ('SETTIMER', 'Set or Reset Game Timer')
+            ('SETTIMER', 'Set Game Timer')
             ]
 
     command = models.CharField(max_length=15, choices=REQUEST_COMMANDS)
