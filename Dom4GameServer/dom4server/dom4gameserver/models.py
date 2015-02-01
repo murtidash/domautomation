@@ -13,6 +13,8 @@ class Game(models.Model):
     name = models.CharField(max_length=500)
     servername = models.CharField(max_length=64)
     status = models.CharField(max_length=15, choices=GAME_STATUSES)
+    timer = models.IntegerField(blank=True)
+    paused = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.name
@@ -47,7 +49,9 @@ class Request(models.Model):
             ]
     REQUEST_COMMANDS = [
             ('RESET','Timer Reset'),
-            ('SETTIMER', 'Set Game Timer')
+            ('SETTIMER', 'Set Game Timer'),
+            ('PAUSE', 'Pause Game Timer'),
+            ('UNPAUSE', 'Restore Game Timer')
             ]
 
     command = models.CharField(max_length=15, choices=REQUEST_COMMANDS)

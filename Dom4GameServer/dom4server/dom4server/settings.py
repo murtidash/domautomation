@@ -51,7 +51,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dom4gameserver',
-    'django_evolution',
+
 )
 
 MIDDLEWARE_CLASSES = (

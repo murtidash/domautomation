@@ -1,5 +1,6 @@
 from subprocess import check_output, call
-import re 
+import re
+from django.conf import settings
 
 def findgameprocess(gg):
     processes = check_output(['ps','ax']).splitlines()
@@ -20,6 +21,10 @@ def killgame(game):
     if mo == None:
         return None
     call(['kill','%s' % mo.group(1)])
+
+def changetimer(game, duration):
+    regex = r"s/hours [0-9]+/hours %d/" % (duration)
+    call(["sed", '-ri',regex,'%s/%s' % (settings.DOM4GAME_DIR,game.servername)],cwd=settings.DOM4GAME_DIR)
 
 
 
