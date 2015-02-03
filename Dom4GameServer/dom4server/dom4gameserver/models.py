@@ -10,11 +10,28 @@ class Game(models.Model):
         ('COMPLETE','Game Complete')
     ]
 
+    AGES = [
+        (1 , 'Early Age'),
+        (2 , 'Middle Age'),
+        (3 , 'Late Age')
+    ]
+
     name = models.CharField(max_length=500)
     servername = models.CharField(max_length=64)
     status = models.CharField(max_length=15, choices=GAME_STATUSES)
     timer = models.IntegerField(blank=True)
     paused = models.BooleanField(default=False)
+    port = models.IntegerField(blank=True)
+    age = models.IntegerField(choices=AGES)
+    thrones = models.BooleanField(default=False)
+    throne1 = models.IntegerField(blank=True)
+    throne2 = models.IntegerField(blank=True)
+    throne3 = models.IntegerField(blank=True)
+    thronewin = models.IntegerField(blank=True)
+    notes = models.CharField(max_length=3000, blank=True, null=True)
+
+
+
 
     def __unicode__(self):
         return self.name
@@ -51,7 +68,8 @@ class Request(models.Model):
             ('RESET','Timer Reset'),
             ('SETTIMER', 'Set Game Timer'),
             ('PAUSE', 'Pause Game Timer'),
-            ('UNPAUSE', 'Restore Game Timer')
+            ('UNPAUSE', 'Restore Game Timer'),
+            ('NEWGAME', 'request New Game')
             ]
 
     command = models.CharField(max_length=15, choices=REQUEST_COMMANDS)

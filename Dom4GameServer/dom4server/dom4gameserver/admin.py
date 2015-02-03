@@ -3,7 +3,7 @@ from dom4gameserver.models import Game, ServerCommand, Request
 
 
 class GameAdmin(admin.ModelAdmin):
-    list_display = ('name','status')
+    list_display = ('name','status','timer','paused')
 
 class RequestAdmin(admin.ModelAdmin):
     fields = ( 'command', 'arg1', 'status', 'game' ,'serverCommand', 'requestDate', 'approvedDate' )

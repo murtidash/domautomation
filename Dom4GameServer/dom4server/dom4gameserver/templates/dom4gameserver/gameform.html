@@ -1,0 +1,53 @@
+
+    <table>
+    <tr>
+        <td>
+            <label for="{{ form.name.id_for_label }}">Game Name:</label>
+        </td><td>
+            {{ form.name }}
+        </td><td>
+            {{ form.name.errors }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="{{ form.servername.id_for_label }}">Server Name:</label>
+        </td><td>
+            {{ form.servername }}
+        </td><td>
+            {{ form.servername.errors }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="{{ form.age.id_for_label }}">Age:</label>
+        </td><td>
+            {{ form.age }}
+        </td><td>
+            {{ form.age.errors }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="{{ form.timer.id_for_label }}">Default Timer:</label>
+        </td><td>
+            {{ form.timer }}
+        </td><td>
+            {{ form.timer.errors }}
+        </td>
+    </tr>
+    </table>
+<p>
+    <label for="{{ form.timer.id_for_label }}">Thrones:</label> {{form.thrones}}
+    <div id="thronesinput" style="display: block;">
+        <table>
+            <tr><td>Thrones</td><td>Lvl. 1</td><td>Lvl. 2</td><td>Lvl. 3</td></tr>
+            <tr><td>Number:</td><td>{{form.throne1}}</td><td>{{form.throne2}}</td><td>{{form.throne3}}</td></tr>
+            <tr><td>Thrones to win:</td><td colspan=3>{{form.thronewin}}</td></tr>
+        </table>
+    </div>
+<p>
+    <label for="{{ form.notes.id_for_label }}">Notes to Admin:</label><br>
+    {{ form.notes }}
+    {{ form.notes.errors }}
+

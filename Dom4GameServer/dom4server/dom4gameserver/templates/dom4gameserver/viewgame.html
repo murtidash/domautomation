@@ -1,0 +1,37 @@
+<HTML>
+<HEAD>
+
+    <SCRIPT>
+
+function showThrones() {
+
+    val = document.getElementById("thrones_id").checked;
+    if(val)
+        document.getElementById("thronesinput").style.display="block";
+    else
+        document.getElementById("thronesinput").style.display="none";
+
+}
+
+showThrones();
+
+</SCRIPT>
+
+
+{% load staticfiles %}
+
+<link href="{% static "css/base.css" %}" rel="stylesheet" type="text/css" />
+
+</HEAD>
+<BODY>
+<h1> Game </h1>
+
+    {% include "dom4gameserver/gameform.html" %}
+    <p>
+    {{ otherform.as_p }}
+
+</BODY>
+</HTML>
+
+
+

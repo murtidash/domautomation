@@ -11,10 +11,15 @@ function changeCommand() {
 
 </SCRIPT>
 
+{% load staticfiles %}
+
+<link href="{% static "css/base.css" %}" rel="stylesheet" type="text/css" />
 
 </HEAD>
 <BODY>
 <h1> Dominions 4 Game Server Requests </h1>
+<p>
+<a href="{% url 'dom4gameserver:newgame' %}">Request New Game</a>
 <p>
 <h2> Create New Request: </h2>
 <form action = "{% url 'dom4gameserver:newrequest' %}" method="post">
@@ -31,12 +36,12 @@ function changeCommand() {
 	  {% endfor %}
   </select>
   <div id="RESET">
-  
+
 
   </div>
   <div id="SETTIMER" style="display: none;">
-	  <span><b>New Timer:</b></span><input type="text" name="timer"> 
-  
+	  <span><b>New Timer:</b></span><input type="text" name="timer">
+
   </div>
 
   <input type="Submit" value="New Request">
@@ -50,7 +55,7 @@ function changeCommand() {
  {% for rr in vreqs %}
   {% if rr.status == "NEW" %}
     <tr>
-	    <td>{{ rr.game.name }}</td><td>{{ rr.get_command_display }}</td><td>{{ rr.requestDate }}</td><td>
+	    <td><a href="{% url 'dom4gameserver:viewgame' rr.game.id %}">{{ rr.game.name }}</a></td><td>{{ rr.get_command_display }}</td><td>{{ rr.requestDate }}</td><td>
 		    {% if user.is_staff %}
 		    <a href="{% url 'dom4gameserver:approverequest' rr.id %}">Approve</a>
 		    {% endif %}
@@ -58,7 +63,7 @@ function changeCommand() {
 
     </tr>
   {% endif %}
- {% endfor %} 
+ {% endfor %}
 
 </table>
 <hr>
@@ -67,7 +72,7 @@ function changeCommand() {
  {% for rr in vreqs %}
    {% if rr.status == "APPROVED" %}
        <tr>
-            <td>{{ rr.game.name }}</td><td>{{ rr.get_command_display }}</td><td>{{ rr.requestDate }}</td><td>
+            <td><a href="{% url 'dom4gameserver:viewgame' rr.game.id %}">{{ rr.game.name }}</a></td><td>{{ rr.get_command_display }}</td><td>{{ rr.requestDate }}</td><td>
               </td>
 
        </tr>

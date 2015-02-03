@@ -1,0 +1,37 @@
+<HTML>
+<HEAD>
+
+<SCRIPT>
+
+function showThrones() {
+
+    val = document.getElementById("thrones_id").checked;
+    if(val)
+        document.getElementById("thronesinput").style.display="block";
+    else
+        document.getElementById("thronesinput").style.display="none";
+
+}
+
+showThrones();
+
+</SCRIPT>
+
+{% load staticfiles %}
+
+<link href="{% static "css/base.css" %}" rel="stylesheet" type="text/css" />
+
+</HEAD>
+<BODY>
+<h1> New Game Request </h1>
+<form action="{% url 'dom4gameserver:newgame' %}" method="post">
+    {% csrf_token %}
+    {% include "dom4gameserver/gameform.html" %}
+    <input type="submit" value="Submit" />
+</form>
+
+</BODY>
+</HTML>
+
+
+
