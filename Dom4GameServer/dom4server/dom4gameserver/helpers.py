@@ -1,5 +1,6 @@
 from subprocess import check_output, call
-import re
+from django.template.loader import render_to_string
+import re, os
 from django.conf import settings
 
 def findgameprocess(gg):
@@ -25,6 +26,13 @@ def killgame(game):
 def changetimer(game, duration):
     regex = r"s/hours [0-9]+/hours %d/" % (duration)
     call(["sed", '-ri',regex,'%s/%s' % (settings.DOM4GAME_DIR,game.servername)],cwd=settings.DOM4GAME_DIR)
+
+def writegamefile(game):
+    call(["mkdir","/var/dom4/savedgames/%s" % game.servername])
+    ff = open(os.path.join(settings.DOM4GAME_DIR,game.servername),"w")
+    ff.write(render_to_string('dom4gameserver/gamefile',{'game':game}))
+    ff.close()
+
 
 
 

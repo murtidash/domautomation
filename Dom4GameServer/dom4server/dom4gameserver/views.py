@@ -33,6 +33,7 @@ def newgame(request):
         re = Request()
         re.game = ng
         re.status = "NEW"
+        re.command = "NEWGAME"
         re.save()
 
 

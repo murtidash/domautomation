@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 class GameForm(ModelForm):
     class Meta:
         model = Game
-        exclude = ['paused','status','port']
+        exclude = ['paused','status','port','masterpass']
         labels = {
             'timer': _('Default Timer'),
         }
@@ -19,7 +19,7 @@ class GameForm(ModelForm):
 class OtherGameForm(ModelForm):
     class Meta:
         model = Game
-        fields = ['paused','status','port']
+        fields = ['paused','status','port','masterpass']
 
 
 

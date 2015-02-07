@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+cd /var/dom4
+
+nohup nice -n +14 /var/dom4/dom4 --era {{ game.age }} -n -g {{ game.servername }} --port {{ game.port }} -ST --statfile --scoredump --hours {{ game.timer }} --preexec /var/dom4/savedgames/{{ game.servername }}/pre.sh --postexec /var/dom4/savedgames/{{ game.servername }}/post.sh --renaming --hofsize 15 --masterpass {{ game.masterpass }} {% if game.thrones %}--thrones {{ game.throne1 }} {{ game.throne2 }} {{ game.throne3 }} --requiredap {{ game.thronewin }} {% endif %}{% if game.maptype == 1 %}--randmap {{ game.randmap }} {% else %}--mapfile {{ game.mapfile }} {% endif %}{% if game.status == "NEW" or game.status == "PRETENDER" %}--noclientstart {% else %}--uploadtime 0 {% endif %}>/var/dom4/savedgames/{{ game.servername }}/game.log  2>/var/dom4/savedgames/{{ game.servername }}/game.err &

@@ -16,6 +16,11 @@ class Game(models.Model):
         (3 , 'Late Age')
     ]
 
+    MAP_TYPES = [
+        (1 , 'Random Map'),
+        (2 , 'Middle Age'),
+    ]
+
     name = models.CharField(max_length=500)
     servername = models.CharField(max_length=64)
     status = models.CharField(max_length=15, choices=GAME_STATUSES)
@@ -28,7 +33,13 @@ class Game(models.Model):
     throne2 = models.IntegerField(blank=True)
     throne3 = models.IntegerField(blank=True)
     thronewin = models.IntegerField(blank=True)
+    maptype = models.IntegerField(choices=MAP_TYPES)
+    randmap = models.IntegerField(blank=True, default=15)
+    mapfile = models.CharField(max_length=64, blank=True)
+    masterpass = models.CharField(max_length=24)
+
     notes = models.CharField(max_length=3000, blank=True, null=True)
+    extraswitches = models.CharField(max_length=3000, blank=True, null=True)
 
 
 
@@ -41,7 +52,8 @@ class ServerCommand(models.Model):
         ('RESET','Reset Timer'),
         ('STOP','Stop Game'),
         ('START','Start (or Restart) Game'),
-        ('SETTIMER','Set a Games Timer')
+        ('SETTIMER','Set a Games Timer'),
+        ('CREATEGAME','Create the Game Script')
     ]
     COMMAND_STATUS = [
         ('NEW','New Command'),
@@ -69,7 +81,7 @@ class Request(models.Model):
             ('SETTIMER', 'Set Game Timer'),
             ('PAUSE', 'Pause Game Timer'),
             ('UNPAUSE', 'Restore Game Timer'),
-            ('NEWGAME', 'request New Game')
+            ('NEWGAME', 'Request New Game')
             ]
 
     command = models.CharField(max_length=15, choices=REQUEST_COMMANDS)
