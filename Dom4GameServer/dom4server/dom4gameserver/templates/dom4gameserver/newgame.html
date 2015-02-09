@@ -13,7 +13,33 @@ function showThrones() {
 
 }
 
-showThrones();
+
+function showMap() {
+
+    val = document.getElementById("maptype_id").value;
+    document.getElementById("mapspanrandlabel").style.display="none";
+    document.getElementById("mapspanfilelabel").style.display="none";
+    document.getElementById("mapspannonelabel").style.display="none";
+    document.getElementById("mapspanrand").style.display="none";
+    document.getElementById("mapspanfile").style.display="none";
+    document.getElementById("mapspanranderror").style.display="none";
+    document.getElementById("mapspanfileerror").style.display="none";
+
+    if(val == 1) {
+    document.getElementById("mapspanrandlabel").style.display="block";
+    document.getElementById("mapspanrand").style.display="block";
+    document.getElementById("mapspanranderror").style.display="block";
+
+    } else if (val == 2) {
+    document.getElementById("mapspanfilelabel").style.display="block";
+    document.getElementById("mapspanfile").style.display="block";
+    document.getElementById("mapspanfileerror").style.display="block";
+
+    } else {
+    document.getElementById("mapspannonelabel").style.display="block";
+
+    }
+}
 
 </SCRIPT>
 
@@ -27,10 +53,17 @@ showThrones();
 <form action="{% url 'dom4gameserver:newgame' %}" method="post">
     {% csrf_token %}
     {% include "dom4gameserver/gameform.html" %}
+    <p>
     <input type="submit" value="Submit" />
 </form>
 
 </BODY>
+<SCRIPT TYPE="text/javascript">
+
+showThrones();
+showMap();
+
+</SCRIPT>
 </HTML>
 
 

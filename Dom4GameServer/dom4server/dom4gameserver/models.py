@@ -18,7 +18,7 @@ class Game(models.Model):
 
     MAP_TYPES = [
         (1 , 'Random Map'),
-        (2 , 'Middle Age'),
+        (2 , 'Pregenerated Map'),
     ]
 
     name = models.CharField(max_length=500)
@@ -69,6 +69,10 @@ class ServerCommand(models.Model):
         return self.game.name + " " + self.command + " " + self.arg1
 
 class Request(models.Model):
+    class Meta:
+        permissions = (
+            ('approve_requests','Can Approve Requests'),
+        )
     REQUEST_STATUS = [
             ('NEW','New Request'),
             ('APPROVED', 'Request Approved'),

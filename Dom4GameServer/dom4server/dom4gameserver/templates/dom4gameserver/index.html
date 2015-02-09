@@ -56,7 +56,7 @@ function changeCommand() {
   {% if rr.status == "NEW" %}
     <tr>
 	    <td><a href="{% url 'dom4gameserver:viewgame' rr.game.id %}">{{ rr.game.name }}</a></td><td>{{ rr.get_command_display }}</td><td>{{ rr.requestDate }}</td><td>
-		    {% if user.is_staff %}
+		    {% if perms.approve_requests %}
 		    <a href="{% url 'dom4gameserver:approverequest' rr.id %}">Approve</a>
 		    {% endif %}
 	      </td>

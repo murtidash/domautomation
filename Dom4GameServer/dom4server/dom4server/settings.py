@@ -15,6 +15,9 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # and need #!/bin/sh or whatever at the top.
 DOM4GAME_DIR = '/var/dom4/games/'
 
+# Path where games are saved.   dominions 4 expects dir+/savedgames
+DOM4SAVEGAME_DIR = '/var/dom4/savedgames/'
+
 # Path to dom4 executable.
 DOM4_PATH = '/var/dom4/dom4'
 

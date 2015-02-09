@@ -3,7 +3,7 @@ from django.conf import settings
 
 from subprocess import check_output, call
 from optparse import make_option
-import re
+import re,os
 
 from dom4gameserver.models import Game
 from dom4gameserver.helpers import findgameprocess
@@ -27,7 +27,7 @@ class Command(BaseCommand):
             for gg in Game.objects.filter(status__in = ['PRETENDER','RUNNING']):
                 if not findgameprocess(gg):
                     self.stdout.write("I didn't find game: %s.   Attempting to Restart..." % gg.name)
-                    call(["sudo", '-u',settings.DOM4_USER,'%s/%s' % (settings.DOM4GAME_DIR,gg.servername)],cwd=settings.DOM4GAME_DIR)
+                    call(["sudo", '-u',settings.DOM4_USER, os.path.join(settings.DOM4GAME_DIR,gg.servername)],cwd=settings.DOM4GAME_DIR)
 
 
 

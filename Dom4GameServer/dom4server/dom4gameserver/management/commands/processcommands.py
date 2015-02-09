@@ -63,7 +63,10 @@ class Command(BaseCommand):
         for cmd in ServerCommand.objects.filter(status__exact = "NEW"):
             executed = False
             if cmd.command == 'CREATEGAME':
+                makegamedir(cmd.game)
                 writegamefile(cmd.game)
+                writegameprescript(cmd.game)
+                writegamepostscript(cmd.game)
                 executed = True
 
             if cmd.command == 'RESET':

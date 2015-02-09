@@ -60,7 +60,7 @@ def newrequest(request):
     req.command = cmd
     req.game = game
     req.status = 'NEW'
-    req.command = "NEWGAME"
+    #req.command = "NEWGAME"
     req.save()
 
     return HttpResponseRedirect(reverse('dom4gameserver:index'))
@@ -68,7 +68,7 @@ def newrequest(request):
 
 
 def approve(request, req_id):
-    if(not request.user.is_authenticated or not request.user.is_staff):
+    if(not request.user.is_authenticated or not request.user.has_perm('approve_requests')):
         return HttpResponseRedirect(reverse('dom4gameserver:index'))
     req = get_object_or_404(Request, pk=req_id)
     req.status = "APPROVED"

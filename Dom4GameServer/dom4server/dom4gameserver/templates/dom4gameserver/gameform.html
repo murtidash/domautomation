@@ -36,6 +36,28 @@
             {{ form.timer.errors }}
         </td>
     </tr>
+    <tr>
+        <td>
+            <label for="{{ form.maptype.id_for_label }}">Map Type:</label>
+        </td><td>
+            {{ form.maptype }}
+        </td><td>
+            {{ form.maptype.errors }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span id="mapspanrandlabel"><label for="{{ form.randmap.id_for_label }}">Provs per Player:</label></span>
+            <span id="mapspanfilelabel"><label for="{{ form.mapfile.id_for_label }}">Map File:</label></span>
+            <span id="mapspannonelabel"><label>Please Select a Map Type</label></span>
+        </td><td>
+            <span id="mapspanrand">{{ form.randmap }}</span>
+            <span id="mapspanfile">{{ form.mapfile }}</span>
+        </td><td>
+            <span id="mapspanranderror">{{ form.randmap.errors }}</span>
+            <span id="mapspanfileerror">{{ form.mapfile.errors }}</span>
+        </td>
+    </tr>
     </table>
 <p>
     <label for="{{ form.timer.id_for_label }}">Thrones:</label> {{form.thrones}}
