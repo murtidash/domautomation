@@ -29,7 +29,9 @@ showThrones();
     {% include "dom4gameserver/gameform.html" %}
     <p>
     <table>
-    {{ otherform.as_table }}
+            {% if perms.approve_requests %}
+                {{ otherform.as_table }}
+            {% endif %}
     </table>
 </BODY>
 </HTML>

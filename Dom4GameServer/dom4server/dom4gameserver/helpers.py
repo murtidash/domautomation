@@ -27,8 +27,8 @@ def changetimer(game, duration):
     regex = r"s/hours [0-9]+/hours %d/" % (duration)
     call(["sed", '-ri',regex,'%s/%s' % (settings.DOM4GAME_DIR,game.servername)],cwd=settings.DOM4GAME_DIR)
 
-def setperm(fname)
-    call(['sudo','-u',settings.DOM4_USER,'chwon','%s:%s' % (settings.DOM4_USER,settings.DOM4_USER), fname])
+def setperm(fname):
+    call(['sudo','-u',settings.DOM4_USER,'chown','%s:%s' % (settings.DOM4_USER,settings.DOM4_USER), fname])
 
 
 def makegamedir(game):

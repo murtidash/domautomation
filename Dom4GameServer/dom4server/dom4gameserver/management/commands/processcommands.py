@@ -45,6 +45,18 @@ class Command(BaseCommand):
                 newc.save()
                 processed = True
 
+            if req.command == 'SETTIMER':
+                newc = ServerCommand()
+                newc.command = 'SETTIMER'
+                newc.game = req.game
+                newc.arg1 = req.arg1
+                newc.status = "NEW"
+                req.game.paused = False
+                req.game.timer = int(req.arg1)
+                req.game.save()
+                newc.save()
+                processed = True
+
             if req.command == 'NEWGAME':
                 newc = ServerCommand()
                 newc.command = 'CREATEGAME'
@@ -53,6 +65,17 @@ class Command(BaseCommand):
                 newc.save()
                 req.game.status = "PRETENDER"
                 req.game.save()
+                processed = True
+
+            if req.command == 'STARTGAME':
+                newc = ServerCommand()
+                newc.command = 'RESET'
+                newc.game = req.game
+                newc.status = "NEW"
+                newc.save()
+                req.game.status = "RUNNING"
+                req.game.save()
+                writegamefile(req.game)
                 processed = True
 
 

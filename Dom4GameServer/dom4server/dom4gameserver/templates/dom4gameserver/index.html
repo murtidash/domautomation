@@ -15,12 +15,74 @@ function changeCommand() {
 
 <link href="{% static "css/base.css" %}" rel="stylesheet" type="text/css" />
 
+<style>
+form {
+     display: inline;
+}
+</style>
+
 </HEAD>
 <BODY>
 <h1> Dominions 4 Game Server Requests </h1>
 <p>
+<table width="100%">
+ {% for game in games %}
+    <tr>
+        <td><a href="{% url 'dom4gameserver:viewgame' game.id %}">{{ game.name }}</a></td>
+        {% if game.status == "RUNNING" %}
+            <td>
+                <form action= "{% url 'dom4gameserver:newrequest' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="command" value="RESET" />
+                    <input type="hidden" name="game" value="{{ game.id }}" />
+                    <input type="submit" value="Reset Timer" />
+                </form>
+            </td>
+            <td>
+                {% if game.paused %}
+                <form action= "{% url 'dom4gameserver:newrequest' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="command" value="UNPAUSE" />
+                    <input type="hidden" name="game" value="{{ game.id }}" />
+                    <input type="submit" value="Un-Pause" />
+                </form>
+                {% else %}
+                <form action= "{% url 'dom4gameserver:newrequest' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="command" value="PAUSE" />
+                    <input type="hidden" name="game" value="{{ game.id }}" />
+                    <input type="submit" value="Pause" />
+                </form>
+                {% endif %}
+            </td>
+            <td>
+                <form action= "{% url 'dom4gameserver:newrequest' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="command" value="SETTIMER" />
+                    <input type="hidden" name="game" value="{{ game.id }}" />
+                    Timer: <input type="text" name="timer" size=5 />
+                    <input type="submit" value="Set Timer" />
+                </form>
+
+            </td>
+        {% elif game.status == "PRETENDER" %}
+            <td>
+                <form action= "{% url 'dom4gameserver:newrequest' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="command" value="STARTGAME" />
+                    <input type="hidden" name="game" value="{{ game.id }}" />
+                    <input type="submit" value="Start Game" />
+                </form>
+            </td>
+        {% endif %}
+    </tr>
+ {% endfor %}
+
+</table>
+<p>
 <a href="{% url 'dom4gameserver:newgame' %}">Request New Game</a>
 <p>
+<!--
 <h2> Create New Request: </h2>
 <form action = "{% url 'dom4gameserver:newrequest' %}" method="post">
   {% csrf_token %}
@@ -48,6 +110,7 @@ function changeCommand() {
 
 
 </form>
+-->
 <p>
 <hr>
 <h2> Unapproved Requests: </h2>

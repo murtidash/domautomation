@@ -29,13 +29,13 @@ class Game(models.Model):
     port = models.IntegerField(blank=True)
     age = models.IntegerField(choices=AGES)
     thrones = models.BooleanField(default=False)
-    throne1 = models.IntegerField(blank=True)
-    throne2 = models.IntegerField(blank=True)
-    throne3 = models.IntegerField(blank=True)
-    thronewin = models.IntegerField(blank=True)
+    throne1 = models.IntegerField(blank=True, null=True)
+    throne2 = models.IntegerField(blank=True, null=True)
+    throne3 = models.IntegerField(blank=True, null=True)
+    thronewin = models.IntegerField(blank=True, null=True)
     maptype = models.IntegerField(choices=MAP_TYPES)
     randmap = models.IntegerField(blank=True, default=15)
-    mapfile = models.CharField(max_length=64, blank=True)
+    mapfile = models.CharField(max_length=64, blank=True, null=True)
     masterpass = models.CharField(max_length=24)
 
     notes = models.CharField(max_length=3000, blank=True, null=True)
@@ -85,7 +85,8 @@ class Request(models.Model):
             ('SETTIMER', 'Set Game Timer'),
             ('PAUSE', 'Pause Game Timer'),
             ('UNPAUSE', 'Restore Game Timer'),
-            ('NEWGAME', 'Request New Game')
+            ('NEWGAME', 'Request New Game'),
+            ('STARTGAME', 'Start Pending Game')
             ]
 
     command = models.CharField(max_length=15, choices=REQUEST_COMMANDS)
